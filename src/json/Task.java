@@ -1,8 +1,8 @@
 package json;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
-import org.codehaus.jackson.annotate.JsonSubTypes;
-import org.codehaus.jackson.annotate.JsonTypeInfo;
+
+import com.fasterxml.jackson.annotation.*;
+import org.joda.time.LocalDate;
 
 @JsonSubTypes({
         @JsonSubTypes.Type(name = "GenericTask", value = GenericTask.class),
@@ -14,6 +14,9 @@ class Task {
     @JsonIgnore
     private String taskType;
 
+    @JsonProperty
+    private LocalDate createdDate;
+
     public Task(String taskType) {
         this.taskType = taskType;
     }
@@ -22,5 +25,15 @@ class Task {
         return this.taskType;
     }
 
+    void setTaskType(String taskType) {
+        this.taskType = taskType;
+    }
 
+    LocalDate getCreatedDate() {
+        return createdDate;
+    }
+
+    void setCreatedDate(LocalDate createdDate) {
+        this.createdDate = createdDate;
+    }
 }
